@@ -225,7 +225,7 @@ void mdp4_overlay_iommu_unmap_freelist(int mixer)
 	if (mixer >= MDP4_MIXER_MAX)
 		return;
 
-	if (!display_iclient) 
+	if (!display_iclient)
 		return;
 
 	mutex_lock(&iommu_mutex);
@@ -347,7 +347,7 @@ int mdp4_overlay_iommu_map_buf(int mem_id,
 		pipe->pipe_ndx, plane);
 	if (ion_map_iommu(display_iclient, *srcp_ihdl,
 		DISPLAY_READ_DOMAIN, GEN_POOL, SZ_4K, 0, start,
-		len, 0, ION_IOMMU_UNMAP_DELAYED)) {
+		len, 0, 0)) {
 		ion_free(display_iclient, *srcp_ihdl);
 		pr_err("ion_map_iommu() failed\n");
 		return -EINVAL;
@@ -2478,7 +2478,7 @@ void mdp4_overlay_pipe_free(struct mdp4_overlay_pipe *pipe, int all)
 
 	/* No need for borderfill pipe */
 	if (pipe->pipe_type != OVERLAY_TYPE_BF)
-		mdp4_overlay_iommu_pipe_free(pipe->pipe_ndx, all);
+		mdp4_overlay_iommu_pipe_free(pipe->pipe_ndx, 1);
 
 	iom = pipe->iommu;
 

@@ -998,9 +998,12 @@ int mdp4_dsi_video_off(struct platform_device *pdev)
 	mdp4_overlay_iommu_unmap_freelist(mixer);
 	mdp4_overlay_iommu_unmap_freelist(mixer);
 
+<<<<<<< HEAD
 	mdp4_dsi_video_tg_off(vctrl);
 	atomic_set(&vctrl->suspend, 1);
 
+=======
+>>>>>>> 597bebc... msm_fb: display: add one more pipe_commit delay before free ion buffer
 	/* mdp clock off */
 	mdp_clk_ctrl(0);
 	mdp_pipe_ctrl(MDP_OVERLAY0_BLOCK, MDP_BLOCK_POWER_OFF, FALSE);
